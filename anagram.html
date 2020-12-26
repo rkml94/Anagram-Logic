@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>Anagram Test</title>
+      <meta name="description" content="Anagram Apps Test">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	  
+     <script type="text/javascript">
+	  var words = ["kita", "atik", "tika", "aku", "kia", "makan", "kua"];
+
+		function replaceStr(str, i, char) {
+		  return str.substr(0, i) + char + str.substr(i + 1);
+		}
+
+		function swap(str, i1, i2) {
+		  return replaceStr(replaceStr(str, i1, str[i2]), i2, str[i1]);
+		}
+
+		function rankChar(str) {
+		  var rank = str;
+		  for (var i = 0; i < rank.length; i++) {
+			for (var j = i + 1; j < rank.length; j++) {
+			  if (rank[i] > rank[j]) {
+				rank = swap(rank, i, j);
+			  }
+			}
+		  }
+		  return rank;
+		}
+
+		function groupAnagrams(strs) {
+		  let result = {};
+		  for (var i = 0; i < strs.length; i++) {
+			let groups = rankChar(strs[i]);
+			if (result[groups]) {
+			  result[groups].push(strs[i]);
+			} else {
+			  result[groups] = [strs[i]];
+			}
+		  }
+		  return Object.values(result);
+		}
+		console.log(groupAnagrams(words));
+		document.write("<h2>Result Anagram Logic and Cek Console.log(ctrl+shift+i)</h2>"+"<br/>");
+		document.write("<h3>["+groupAnagrams(words)[0]+"]</h3>"+"<br/>");
+		document.write("<h3>["+groupAnagrams(words)[1]+"]</h3>"+"<br/>");
+		document.write("<h3>["+groupAnagrams(words)[2]+"]</h3>"+"<br/>");
+		document.write("<h3>["+groupAnagrams(words)[3]+"]</h3>"+"<br/>");
+		
+	  </script>
+   </head>
+</html>
